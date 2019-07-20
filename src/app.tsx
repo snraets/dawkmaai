@@ -1,7 +1,10 @@
 import * as React from 'react';
+import { StateInspector } from 'reinspect'
 
 import Routes from './components/routes';
 
 export default () => {
-    return <Routes />;
+    return <StateInspector name='DAWKMAAI'>
+        <Routes />
+    </StateInspector>;
 }
