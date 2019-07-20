@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import {AppContextConsumer} from '../routes'
+import GetFile from './getFile';
 
 export default () => {
 
@@ -10,5 +11,6 @@ export default () => {
 
     return <div>
         <h1>I am home</h1>
+        <GetFile />
     </div>
 }
