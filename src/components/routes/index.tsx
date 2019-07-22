@@ -8,6 +8,7 @@ import Home from '../home';
 import Error from '../error';
 
 import masterReducer from '../../reducers/master';
+import comparisonReducer from '../../reducers/comparison';
 
 enum LoadStatus {
     LOADING,
@@ -16,21 +17,24 @@ enum LoadStatus {
 
 const AppContext = React.createContext({
     masterDispatch: (action) => {},
-    masterState: {}
+    masterState: {},
+    comparisonDispatch: (action) => {},
+    comparisonState: {}
 });
 
 export default () => {
 
     const [loadStatus, setLoadStatus] = useState<LoadStatus>(LoadStatus.LOADING, 'LOADING');      
     const [masterState, masterDispatch] = masterReducer();
+    const [comparisonState, comparisonDispatch] = comparisonReducer();
 
     useEffect(() => {
 
         retrieveMaster()
-        .then((masterData) => {
-            setLoadStatus(LoadStatus.READY);
-            masterDispatch({type: 'SET', payload: masterData});
-        });
+            .then((masterData) => {
+                setLoadStatus(LoadStatus.READY);
+                masterDispatch({type: 'SET', payload: masterData});
+            });
 
     }, masterState)
 
@@ -39,7 +43,11 @@ export default () => {
             return <React.Fragment></React.Fragment>;
         case LoadStatus.READY:
             return <AppContext.Provider 
-                    value={{masterDispatch, masterState}}>  
+                    value={{
+                        masterDispatch, 
+                        masterState, 
+                        comparisonDispatch, 
+                        comparisonState}}>  
                 <Router>
                     <Route path='/' exact component={Home} />
                     <Route path='/error' component={Error} />
