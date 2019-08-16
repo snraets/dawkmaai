@@ -1,6 +1,7 @@
 import React, {useState as PROD, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { useState } from 'reinspect';
+import sw from 'stopword';
 
 import retrieveMaster from '../../api/retrieveMaster';
 
